@@ -113,7 +113,7 @@ class ResponseGenerator:
         generated_text = self._tokenizer.decode(outputs[0], skip_special_tokens=True)
         return generated_text
     
-    def generate(self, user_question: str, collection_name: str = "rag_cookbook_collection") -> str:
+    def generate(self, user_question: str, collection_name: str = "pharma_copy_collection") -> str:
         """Generate a response to a user question using retrieved context from the database with source citations."""
         self._load_model()
         
@@ -206,13 +206,13 @@ class ResponseGenerator:
         return "\n".join([f"[Passage {i+1}] {passage}" for i, passage in enumerate(passages)])
 
 
-def generate_response(user_question: str, collection_name: str = "rag_cookbook_collection") -> str:
+def generate_response(user_question: str, collection_name: str = "pharma_copy_collection") -> str:
     """Public API for generating responses. Uses singleton instance internally."""
     generator = ResponseGenerator.get_instance()
     return generator.generate(user_question, collection_name)
 
 
-def evaluate_marketing_copy(marketing_copy: str, collection_name: str = "rag_cookbook_collection") -> str:
+def evaluate_marketing_copy(marketing_copy: str, collection_name: str = "pharma_copy_collection") -> str:
     """Evaluate pharmaceutical marketing copy against FDA guidelines from the database."""
     generator = ResponseGenerator.get_instance()
     generator._load_model()

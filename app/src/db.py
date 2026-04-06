@@ -10,7 +10,7 @@ def load_passages_from_jsonl(jsonl_path):
                 passages.append(json.loads(line))
     return passages
 
-def insert_passages_to_chromadb(jsonl_path, collection_name="rag_cookbook_collection"):
+def insert_passages_to_chromadb(jsonl_path, collection_name="pharma_copy_collection"):
     chroma_client = chromadb.PersistentClient(path="./chroma_db")
     try:
         collection = chroma_client.get_collection(name=collection_name)
@@ -77,7 +77,7 @@ def insert_passages_to_chromadb(jsonl_path, collection_name="rag_cookbook_collec
         f" Skipped {duplicates_skipped} duplicate IDs in JSONL and {already_in_db} already existing passages in the collection."
     )
 
-def query_relevant_passages(user_question, n_results=3, collection_name="rag_cookbook_collection"):
+def query_relevant_passages(user_question, n_results=3, collection_name="pharma_copy_collection"):
     chroma_client = chromadb.PersistentClient(path="./chroma_db")
     collection = chroma_client.get_collection(name=collection_name)
     
@@ -88,7 +88,7 @@ def query_relevant_passages(user_question, n_results=3, collection_name="rag_coo
         "ids": results.get("ids", [])[0] if results.get("ids") else [],
     }
 
-def verify_pharma_copy(user_text, collection_name="rag_cookbook_collection"):
+def verify_pharma_copy(user_text, collection_name="pharma_copy_collection"):
     """
     Verify pharmaceutical copy against FDA standards using RAG.
     Retrieves relevant standards from the database and provides feedback.

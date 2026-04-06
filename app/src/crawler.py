@@ -76,7 +76,7 @@ def get_new_urls(urls_txt_path: str, seen_path: str):
     return [url for url in urls if normalize_url(url) not in seen]
 
 
-def crawl_urls(urls, output_path: str = "output.jsonl", seen_path: str = "seen_urls.txt"):
+def crawl_urls(urls, output_path: str = "data/output.jsonl", seen_path: str = "data/seen_urls.txt"):
     if not urls:
         return 0
     seen = load_seen_urls(seen_path)
@@ -128,7 +128,7 @@ def crawl_urls(urls, output_path: str = "output.jsonl", seen_path: str = "seen_u
     return total_new
 
 
-def crawl_single_url(url: str, output_path: str = "output.jsonl", seen_path: str = "seen_urls.txt"):
+def crawl_single_url(url: str, output_path: str = "data/output.jsonl", seen_path: str = "data/seen_urls.txt"):
     # Load seen URLs
     seen = set()
     try:
@@ -188,7 +188,7 @@ def crawl_single_url(url: str, output_path: str = "output.jsonl", seen_path: str
         out_f.close()
 
 
-def crawl_from_file(urls_txt_path: str, output_path: str = "output.jsonl", seen_path: str = "seen_urls.txt"):
+def crawl_from_file(urls_txt_path: str, output_path: str = "data/output.jsonl", seen_path: str = "data/seen_urls.txt"):
     urls = load_urls_from_file(urls_txt_path)
     return crawl_urls(urls, output_path, seen_path)
 
@@ -198,8 +198,8 @@ if __name__ == "__main__":
         print("Usage: python crawler.py <urls.txt or single URL> [output.jsonl] [seen_urls.txt]")
         sys.exit(1)
     arg1 = sys.argv[1]
-    out = sys.argv[2] if len(sys.argv) > 2 else "output.jsonl"
-    seen = sys.argv[3] if len(sys.argv) > 3 else "seen_urls.txt"
+    out = sys.argv[2] if len(sys.argv) > 2 else "data/output.jsonl"
+    seen = sys.argv[3] if len(sys.argv) > 3 else "data/seen_urls.txt"
     if arg1.startswith("http://") or arg1.startswith("https://"):
         # Single URL mode
         crawl_single_url(arg1, out, seen)
