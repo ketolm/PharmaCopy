@@ -2,6 +2,17 @@
 
 A Python project for crawling FDA regulatory guideline pages, indexing relevant passages into ChromaDB, and evaluating pharmaceutical marketing copy for compliance.
 
+## Tech Stack
+
+- **Language**: Python 3.14+
+- **Framework**: FastAPI (HTTP service layer)
+- **Package Manager**: `uv` (fast Python package installer)
+- **LLM**: Hugging Face Transformers (`Qwen/Qwen2.5-7B-Instruct`)
+- **Vector DB**: ChromaDB (semantic search & indexing)
+- **Web Scraping**: `requests`, `BeautifulSoup4`, `google-labs-html-chunker`
+- **Container**: Docker & Docker Compose
+- **Deep Learning**: PyTorch, accelerate, bitsandbytes
+
 ## How it works
 
 The pipeline is implemented using the files under `app/src`:
