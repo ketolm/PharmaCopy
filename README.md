@@ -1,6 +1,6 @@
 ﻿# PharmaCopy
 
-A Python project for crawling FDA regulatory guideline pages, indexing relevant passages into ChromaDB, and evaluating pharmaceutical marketing copy for compliance.
+A RAG + LLM project for crawling FDA regulatory guideline pages, indexing relevant passages into ChromaDB, and evaluating pharmaceutical marketing copy for compliance.
 
 ## Tech Stack
 
