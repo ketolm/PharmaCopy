@@ -1,7 +1,7 @@
 [project]
 name = "pharmacopy"
 version = "0.1.0"
-description = "Add your description here"
+description = "Crawl FDA guidelines, index passages into vector DB, and evaluate pharmaceutical marketing copy for compliance using RAG + LLM"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
