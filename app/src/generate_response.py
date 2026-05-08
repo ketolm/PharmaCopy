@@ -1,3 +1,4 @@
+import os
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 from typing import Optional
@@ -77,8 +78,10 @@ class ResponseGenerator:
         
         try:
             print(f"Loading model: {MODEL}")
-            self._tokenizer = AutoTokenizer.from_pretrained(MODEL, cache_dir="D:/HuggingFace/Cache")
-            self._model = AutoModelForCausalLM.from_pretrained(MODEL, cache_dir="D:/HuggingFace/Cache")
+            hf_cache = os.getenv("HF_HOME", "./hf_cache")
+            os.makedirs(hf_cache, exist_ok=True)
+            self._tokenizer = AutoTokenizer.from_pretrained(MODEL, cache_dir=hf_cache)
+            self._model = AutoModelForCausalLM.from_pretrained(MODEL, cache_dir=hf_cache)
             
             # Handle models without a pad token (e.g., gpt2)
             if self._tokenizer.pad_token is None:

@@ -79,7 +79,10 @@ def insert_passages_to_chromadb(jsonl_path, collection_name="pharma_copy_collect
 
 def query_relevant_passages(user_question, n_results=3, collection_name="pharma_copy_collection"):
     chroma_client = chromadb.PersistentClient(path="./chroma_db")
-    collection = chroma_client.get_collection(name=collection_name)
+    try:
+        collection = chroma_client.get_collection(name=collection_name)
+    except NotFoundError as exc:
+        raise RuntimeError(f"ChromaDB collection '{collection_name}' not found. Please index data before querying.") from exc
     
     results = collection.query(query_texts=[user_question], n_results=n_results)
     return {

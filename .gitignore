@@ -7,6 +7,7 @@ wheels/
 *.egg-info
 chroma_db/
 data/
+hf_cache/
 
 # Virtual environments
 .venv

@@ -1,0 +1,15 @@
+services:
+  pharmacopy-api:
+    image: pharmacopy-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app/src/data:/app/app/src/data
+      - ./app/src/chroma_db:/app/app/src/chroma_db
+      - ./hf_cache:/app/hf_cache
+    environment:
+      - HF_HOME=/app/hf_cache
+    restart: unless-stopped
