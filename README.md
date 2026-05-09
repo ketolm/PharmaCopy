@@ -6,7 +6,6 @@ A RAG + LLM project for crawling FDA regulatory guideline pages, indexing releva
 
 - **Language**: Python 3.14+
 - **Framework**: FastAPI (HTTP service layer)
-- **Package Manager**: `uv` (fast Python package installer)
 - **LLM**: Hugging Face Transformers (`Qwen/Qwen2.5-7B-Instruct`)
 - **Vector DB**: ChromaDB (semantic search & indexing)
 - **Web Scraping**: `requests`, `BeautifulSoup4`, `google-labs-html-chunker`
