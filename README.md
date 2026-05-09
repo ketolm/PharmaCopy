@@ -95,7 +95,11 @@ Run the app as a long-running HTTP service for programmatic access via API.
 #### Quick start with Docker Compose
 
 ```powershell
+# First time (builds and starts)
 docker compose up --build
+
+# Subsequent runs (starts existing container)
+docker compose up
 ```
 
 This will:
@@ -105,13 +109,7 @@ This will:
   - `./app/src/data` → `/app/app/src/data`
   - `./app/src/chroma_db` → `/app/app/src/chroma_db`
   - `./hf_cache` → `/app/hf_cache`
-
-#### Or build manually with Docker
-
-```powershell
-docker build -t pharmacopy-api .
-docker run --rm -p 8000:8000 pharmacopy-api
-```
+- **Pre-load the LLM model** (may take several minutes on first run)
 
 #### API Endpoints
 
@@ -193,6 +191,7 @@ Or use the interactive Swagger UI at `http://localhost:8000/docs`.
 
 ## Troubleshooting
 
+- **Container startup is slow**: The LLM model pre-loads on startup (may take 5-10 minutes on first run with model download).
 - **Crawling fails**: Check network access and ensure URLs are valid.
 - **ChromaDB not found**: Confirm that `./app/src/chroma_db/` exists and is writable (for service mode, check volume mounts).
 - **Model loading fails**: Verify the `HF_HOME` environment variable points to a writable cache directory.

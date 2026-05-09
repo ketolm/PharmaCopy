@@ -42,6 +42,21 @@ class AskPayload(BaseModel):
     collection_name: str = DEFAULT_COLLECTION
 
 
+@app.on_event("startup")
+async def startup_event():
+    """Pre-load the LLM model on startup to avoid blocking first requests."""
+    try:
+        print("Pre-loading LLM model...")
+        # This will trigger model loading
+        from generate_response import ResponseGenerator
+        generator = ResponseGenerator.get_instance()
+        generator._load_model()
+        print("Model pre-loaded successfully!")
+    except Exception as e:
+        print(f"Warning: Failed to pre-load model: {e}")
+        print("Model will be loaded on first request instead.")
+
+
 @app.get("/")
 def root():
     return {
